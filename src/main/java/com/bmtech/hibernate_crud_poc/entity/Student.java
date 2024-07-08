@@ -1,10 +1,9 @@
 package com.bmtech.hibernate_crud_poc.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "student")
 public class Student {
 
     @Id
@@ -24,8 +23,7 @@ public class Student {
     public Student() {
     }
 
-    public Student(int id, String firstName, String lastName, String email) {
-        this.id = id;
+    public Student(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
