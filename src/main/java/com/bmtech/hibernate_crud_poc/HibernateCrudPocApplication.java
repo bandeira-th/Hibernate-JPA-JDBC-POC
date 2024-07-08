@@ -43,6 +43,10 @@ public class HibernateCrudPocApplication {
 		List<Student> studentsList = studentDAO.findAll();
 
 		System.out.println("List of students: " + studentsList);
+
+		System.out.println("Retrieving students by given last name:");
+		List<Student> studentsListByLastName = studentDAO.findByLastName("Smith");
+		System.out.println("List of students by given last name: " + studentsListByLastName);
 	}
 
 
