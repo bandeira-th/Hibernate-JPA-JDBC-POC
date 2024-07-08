@@ -9,6 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class HibernateCrudPocApplication {
 
@@ -36,6 +38,11 @@ public class HibernateCrudPocApplication {
 		Student retrievedStudentB = studentDAO.findById(myStudentB.getId());
 
 		System.out.println("The students have been retrieved: " + retrievedStudent + " and " + retrievedStudentB);
+
+		System.out.println("Retrieving all students");
+		List<Student> studentsList = studentDAO.findAll();
+
+		System.out.println("List of students: " + studentsList);
 	}
 
 
