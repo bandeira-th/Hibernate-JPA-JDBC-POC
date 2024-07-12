@@ -14,4 +14,7 @@ public interface StudentDAO {
 
     List<Student> findByLastName(String lastName);
 
+    //named parameters
+    List<Student> findByFirstName(String firstName);
+
 }

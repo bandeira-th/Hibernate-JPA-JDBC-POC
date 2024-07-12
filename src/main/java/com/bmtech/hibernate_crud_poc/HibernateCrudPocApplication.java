@@ -21,33 +21,70 @@ public class HibernateCrudPocApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
 		return runner -> {
-			createStudent(studentDAO);
+			//createStudent(studentDAO);
+			//createMultipleStudents(studentDAO);
+			//findStudentsBylastName(studentDAO);
+			findStudentsByFirstName(studentDAO);
 		};
 	}
 
+	private void findStudentsByFirstName(StudentDAO studentDAO) {
+
+		Student student = new Student("Lily", "Moss", "lm@gmail.com");
+
+		studentDAO.save(student);
+
+		List<Student> students = studentDAO.findByFirstName(student.getFirstName());
+
+		for (Student s : students) {
+			System.out.println(s.getFirstName() + " " + s.getLastName());
+		}
+	}
+
+	private void findStudentsBylastName(StudentDAO studentDAO) {
+		List<Student> studentsByLastName = studentDAO.findByLastName("Adam");
+
+		for (Student student : studentsByLastName) {
+			System.out.println(student.getLastName() + ", " + student.getFirstName());
+		}
+	}
+
 	private void createStudent(StudentDAO studentDAO) {
+
 		System.out.println("Creating student...");
-		Student myStudent = new Student("Jon", "Smith", "js@mail.com");
-		Student myStudentB = new Student("Jane", "Smith", "js@mail.com");
+		Student myStudent = new Student("Jamile", "Foster", "jf@mail.com");
+
 		System.out.println("Saving student...");
 		studentDAO.save(myStudent);
-		studentDAO.save(myStudentB);
 
 		System.out.println("Retrieving student...");
 		Student retrievedStudent = studentDAO.findById(myStudent.getId());
-		Student retrievedStudentB = studentDAO.findById(myStudentB.getId());
 
-		System.out.println("The students have been retrieved: " + retrievedStudent + " and " + retrievedStudentB);
+		System.out.println("The student has been retrieved: " + retrievedStudent);
+
+
+	}
+
+
+	private void createMultipleStudents(StudentDAO studentDAO) {
+		System.out.println("Creating multiple students...");
+
+		Student myStudentA = new Student("Math", "Johnson", "mj@mail.com");
+		Student myStudentB = new Student("Lane", "Adam", "la@mail.com");
+		Student myStudentC = new Student("George", "Costanza", "gc@mail.com");
+
+		System.out.println("Saving multiple students...");
+		studentDAO.save(myStudentA);
+		studentDAO.save(myStudentB);
+		studentDAO.save(myStudentC);
 
 		System.out.println("Retrieving all students");
 		List<Student> studentsList = studentDAO.findAll();
 
-		System.out.println("List of students: " + studentsList);
+		for (Student student : studentsList) {
+			System.out.println(student.toString());
 
-		System.out.println("Retrieving students by given last name:");
-		List<Student> studentsListByLastName = studentDAO.findByLastName("Smith");
-		System.out.println("List of students by given last name: " + studentsListByLastName);
+		}
 	}
-
 
 }
